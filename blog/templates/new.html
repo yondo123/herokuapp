@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block contents %}
+<body>
+    <br>
+    <div class="container">
+        <form method="POST">
+            {% csrf_token %}
+            <table>
+                {{form.as_table}} 
+            </table>
+            <br>
+                <input class="btn btn-primary" type="submit" value="등록하기" style="text-align : center">
+        </form>
+    </div>
+</body>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block contents %}
+<link href="https://fonts.googleapis.com/css?family=Nanum+Myeongjo" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Nanum+Myeongjo|Noto+Sans+KR" rel="stylesheet">
+    <br>
+    {% for blog in posts%} 
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title"style="font-family: 'Nanum Myeongjo', serif;font-weight: 600; "> {{blog.title}}</h5>
+            <p class="card-text" style="font-family: 'Slabo 27px', serif; font-weight: 400;">Date : {{blog.pub_date}}</p>
+            <p class="card-text" style="font-family: 'Noto Sans KR', sans-serif;">{{blog.summary}}..</p>
+            <a href="{%url 'detail' blog.id%}" class="btn btn-primary">more</a>
+        </div>
+    </div>
+    <br>
+    {% endfor %}
+    
+    <div class="container">
+    {#First Previous#}
+    {%if posts.has_previous%} 
+    <a href="?page=1" class="btn btn-outline-info">First</a>
+    <a href="?page={{posts.previous_page_number}}" class="btn btn-outline-info">Previous</a> 
+    {%endif%}
+    {#3 of 4#}
+    <span style="font-family: 'Slabo 48px', serif; font-weight: 400;">{{posts.number}} of</span>
+    <span>{{posts.paginator.num_pages}}</span>
+    
+    {%if posts.has_next%}
+    <a href="?page={{posts.next_page_number}}"class="btn btn-outline-info">Next</a>
+    <a href="?page={{posts.paginator.num_pages}}" class="btn btn-outline-info">Last</a> <!--전체페이지 수-->
+    {%endif%}
+    </div>
+{% endblock %}
